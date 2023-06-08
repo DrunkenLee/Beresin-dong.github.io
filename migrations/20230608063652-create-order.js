@@ -11,10 +11,10 @@ module.exports = {
       },
       CustomerId: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       totalPrice: {
         type: Sequelize.INTEGER,
