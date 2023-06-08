@@ -1,4 +1,4 @@
-const {User} = require("../models");
+const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
 class UserController {
@@ -7,47 +7,44 @@ class UserController {
   }
 
   static registerPost(req, res) {
-    const {username, password, role} = req.body;
+    const { username, password, role } = req.body;
 
-    
-    User
-      .create({username, password, role})
+    User.create({ username, password, role })
       .then(() => {
         res.redirect("/login");
       })
       .catch((err) => {
         res.send(err);
-      })
+      });
   }
 
   static loginGet(req, res) {
-    res.render("user-login-form");
+    let error = "";
+    res.render("user-login-form", { error });
   }
 
   static loginPost(req, res) {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
 
-    User
-      .findOne({where: {username}})
+    User.findOne({ where: { username } })
       .then((user) => {
         if (user) {
           const isValidPassword = bcrypt.compareSync(password, user.password);
-
           if (isValidPassword) {
-            return res.send('login sukses');
+            req.session.SessionUserId = user.id; //set session id
+            req.session.SessionUsername = user.username; //set session username
+            return res.redirect("/orders");
           }
-          throw 'login gagal';
-          // const error = "Invalid password"
-          // return res.redirect("/login?error=${error}")
+          throw "login gagal, username atau password tidak ditemukan";
         } else {
-          throw 'username tidak ditemukan';
-          // const error = "Invalid username"
-          // return res.redirect("/login?error=${error}")
+          console.log(err);
+          res.send(err);
         }
       })
       .catch((err) => {
+        console.log(err);
         res.send(err);
-      })
+      });
   }
 }
 

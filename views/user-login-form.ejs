@@ -34,7 +34,9 @@
     </div>
 
     <div class="container mt-5 mb-5">
+      <% if(error) { %>
       <!-- error alert disini -->
+      <%- include('template/modal-error.ejs') %> <% } %>
     </div>
 
     <div style="border: 1px solid black" class="container mt-5">
