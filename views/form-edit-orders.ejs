@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="text-center">Edit Orderan Kamu</h2>
+      <br />
+      <br />
+      <div class="row mt-5 mb-5">
+        <div class="col-8 mt-5">
+          <!-- FORM DARI SINI ------------------------------------------------------->
+          <form action="/orders/update/<%= targetOrder.id %>" method="post">
+            <div class="form-group mb-3">
+              <label for="description">Apa Masalah Nya ?</label>
+              <textarea
+                name="description"
+                class="form-control"
+                rows="3"
+              ><%= targetOrder.description %></textarea>
+            </div>
+            <label for="service">Pilih Solusinya..</label>
+
+            <!-- memasukkan services yg dipilih ke suatu array -->
+            <% const chosenServices = targetOrder.Services.map(e => { %>
+                                <%  return e.id %>
+                                <% }) %>
+            <!-- ------------------------------------- -->
+            <div class="input-group mb-3">
+              <% services.forEach(servis => { %>
+              <div class="input-group-text">
+                <input
+                  name="services"
+                  class="form-check-input mt-0"
+                  type="checkbox"
+                  value="<%= servis.id %>|<%= servis.price %>"
+                  <%= chosenServices.includes(servis.id) ? 'checked' : '' %>
+                />
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                value="<%= servis.name %>"
+              />
+              <% }) %>
+            </div>
+
+            <div class="input-group">
+              <input
+                disabled
+                name="totalPrice"
+                type="text"
+                class="form-control"
+                value="<%= targetOrder.totalPrice %>"
+              />
+              <span class="input-group-text">IDR</span>
+              <span class="input-group-text">.00</span>
+            </div>
+            <br />
+            <h6>Pastikan sudah sesuai ya!</h6>
+            <button type="submit" class="btn btn-info">Update Skuy !</button>
+          </form>
+          <!-- FORM SAMPAI SINI ----------------------------------------------------->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

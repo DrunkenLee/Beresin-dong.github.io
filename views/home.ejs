@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>BeresinDong!</title>
+  </head>
+  <body>
+    <%- include('./template/headers.ejs') %>
+    <div class="container mt5">
+      <h1>Selamat Datang!</h1>
+      <p>
+        <h4>Platform Kelas Dunia, yang terpercaya</h4>
+        <h5>Banyak Masalah ? BeresinDong...yekan</h5>
+        <br>
+        <p>Temukan solusi atas perawatan bangunan anda di BeresinDong. Di BeresinDong, Anda bisa mendapatkan jasa perawatan bangunan, meliputi perbaikan bangunan secara umum, saluran air, kelistrikan, dan taman.</p>
+      </p>
+
+      <div class="row">
+        <div class="col-6 border-end text-center mt-5">
+          <h3>Udah Punya Akun ?</h3>
+          <p>Tapi Masih Banyak Masalah</p>
+          <Button onclick="window.location.href='/login';"><h1>LOGIN</h1></Button>
+        </div>
+        <div class="col-6 border-start text-center mt-5" >
+          <h3>Belum Punya Akun ?</h3>
+          <p>Tapi Banyak Masalah</p>
+          <Button onclick="window.location.href='/register';"><h1>REGISTER</h1></Button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+
+  <%- include('./template/footer.ejs') %>
+</html>
