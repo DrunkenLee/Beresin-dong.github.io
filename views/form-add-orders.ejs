@@ -15,12 +15,13 @@
     <title>Home</title>
   </head>
   <body>
+    <%- include('./template/headers.ejs') %>
     <div class="container mt-5">
       <h2 class="text-center">Buat Orderan Kamu</h2>
       <br />
       <br />
       <div class="row mt-5 mb-5">
-        <div class="col-8 mt-5">
+        <div class="col-8 mt-5 border-end">
           <!-- FORM DARI SINI ------------------------------------------------------->
           <form action="/orders/add" method="post">
             <div class="form-group mb-3">
@@ -56,6 +57,7 @@
                 name="totalPrice"
                 type="text"
                 class="form-control"
+                value="Rp.<%= result.totalPrice %>,-"
               />
               <span class="input-group-text">IDR</span>
               <span class="input-group-text">.00</span>
@@ -66,7 +68,24 @@
           </form>
           <!-- FORM SAMPAI SINI ----------------------------------------------------->
         </div>
+        <div class="col-4 mt-5">
+          <div class="container text-center">
+            <h5>Your Order Summary</h5>
+            <img class="w-50 h-50 text-center" src="<%= resQr %>" alt="" />
+            <p>Scan Above Code for details of your order</p>
+            <br />
+            <br />
+            <% if (resQr) { %> <%- include('./template/modal-success.ejs') %>
+            <a href="/orders"
+              ><button class="btn btn-warning">See Your Orders</button></a
+            >
+
+            <% } %>
+          </div>
+        </div>
       </div>
     </div>
+    <script src="/controllers/OrderController.js"></script>
+    <%- include('./template/footer.ejs') %>
   </body>
 </html>

@@ -1,4 +1,6 @@
 "use strict";
+const QRCode = require("qrcode");
+var bcrypt = require("bcryptjs");
 const { Model } = require("sequelize");
 const { formatRupiah, formatDate } = require("../helpers/formatter");
 module.exports = (sequelize, DataTypes) => {
@@ -51,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Order.addHook("beforeCreate", (order, options) => {
     order.status = "Pending";
-    order.VendorId = -1;
+    order.VendorId = 2;
   });
 
   return Order;
