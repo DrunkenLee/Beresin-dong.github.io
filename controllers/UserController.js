@@ -2,6 +2,19 @@ const { User, UserDetail } = require("../models");
 const bcrypt = require("bcryptjs");
 
 class UserController {
+  static home(req, res) {
+    let error = "";
+    res.render("home", { error });
+  }
+
+  static logout(req, res) {
+    req.session.destroy(function (err) {
+      // cannot access session here
+      if (err) req.send(err);
+      res.redirect("/");
+    });
+  }
+
   static registerGet(req, res) {
     res.render("user-register-form");
   }

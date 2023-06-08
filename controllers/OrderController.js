@@ -1,27 +1,52 @@
 const { Service, User, Order, UserDetail, OrderService} = require("../models");
 
 class OrderController {
-  //
+  static filterGetOrder(options, req, res) {
+    Order.findAll({
+      where: {
+        options,
+      },
+      include: {
+        model: User,
+        as: "Customer",
+        include: { model: UserDetail },
+      },
+    });
+  }
+
   static getAllOrders(req, res) {
     let { SessionRole, SessionUserId } = req.session;
+    let { search, sort } = req.query;
     if (SessionRole == "vendor") {
       let error = "";
       Order.findAll({
         where: {
           VendorId: SessionUserId,
         },
+        include: {
+          model: User,
+          as: "Customer",
+          include: { model: UserDetail },
+        },
       })
         .then((result) => {
+          console.log(result);
           let error = "";
           res.render("vendor-orders", { result, error });
         })
         .catch((err) => {
+          console.log(err);
           res.send(err);
         });
     } else {
       Order.findAll({
         where: {
           CustomerId: SessionUserId,
+        },
+        include: {
+          model: User,
+          as: "Customer",
+          include: { model: UserDetail },
         },
       })
         .then((result) => {

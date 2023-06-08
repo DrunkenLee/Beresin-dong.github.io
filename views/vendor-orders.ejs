@@ -15,6 +15,7 @@
     <title>Home</title>
   </head>
   <body>
+    <%- include('./template/headers.ejs') %>
     <div class="container text-center mt-5">
       <h4>List Order Tersedia</h4>
       <br />
@@ -38,8 +39,8 @@
           <% result.forEach((order, index) => { %>
           <tr>
             <td><%= index + 1 %></td>
-            <td><%= order.CustomerId %></td>
-            <td><%= order.totalPrice %></td>
+            <td><%= order.Customer.UserDetail.fullName %></td>
+            <td><%= order.formattedRupiah %></td>
             <td><%= order.status %></td>
             <td><%= order.formattedDate %></td>
             <td>
@@ -56,5 +57,6 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <%- include('./template/footer.ejs') %>
   </body>
 </html>
