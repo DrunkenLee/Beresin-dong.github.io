@@ -45,7 +45,7 @@
         </div>
         <!-- start form ---------------------------------------------------------------------->
         <div class="col-6 mt-5">
-          <form action="/user/register" method="post">
+          <form action="/" method="post">
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input
@@ -58,19 +58,19 @@
 
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" />
+              <input type="password" class="form-control" name="password"/>
             </div>
 
             <div class="mb-3">
               <label for="confirmpassword" class="form-label"
                 >Confirm Password</label
               >
-              <input type="confirmpassword" class="form-control" />
+              <input type="password" class="form-control" name="confirmPassword"/>
             </div>
 
             <div class="mb-3">
-              <select class="form-select" aria-label="Default select example">
-                <option value="" selected>Kamu Sebagai Apa ?</option>
+              <select class="form-select" aria-label="Default select example" name="role">
+                <option value="" selected disabled>Kamu Sebagai Apa ?</option>
                 <option value="vendor">Vendor</option>
                 <option value="customer">Customer</option>
               </select>
