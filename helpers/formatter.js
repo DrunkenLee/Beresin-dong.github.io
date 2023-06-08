@@ -1,8 +1,14 @@
 function formatRupiah(value) {
-  return value.toLocateString("id-ID", {
+  return value.toLocaleString("id-ID", {
     style: "currency",
     currency: "IDR",
   });
 }
 
-module.exports = formatRupiah;
+function formatDate(value) {
+  return value.toLocaleString("id-ID", {
+    dateStyle: "medium",
+  });
+}
+
+module.exports = { formatRupiah, formatDate };

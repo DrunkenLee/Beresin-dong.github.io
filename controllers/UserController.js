@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, UserDetail } = require("../models");
 const bcrypt = require("bcryptjs");
 
 class UserController {
@@ -32,17 +32,15 @@ class UserController {
           const isValidPassword = bcrypt.compareSync(password, user.password);
           if (isValidPassword) {
             req.session.SessionUserId = user.id; //set session id
-            req.session.SessionUsername = user.username; //set session username
+            req.session.SessionRole = user.role; //set session role privilages
             return res.redirect("/orders");
           }
           throw "login gagal, username atau password tidak ditemukan";
         } else {
-          console.log(err);
           res.send(err);
         }
       })
       .catch((err) => {
-        console.log(err);
         res.send(err);
       });
   }
