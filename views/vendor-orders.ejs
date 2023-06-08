@@ -51,6 +51,7 @@
           <tr>
             <th scope="col">No</th>
             <th scope="col">Customer</th>
+            <th scope="col">Description</th>
             <th scope="col">Total Price</th>
             <th scope="col">Status</th>
             <th scope="col">Posted</th>
@@ -62,8 +63,8 @@
           <tr>
             <td><%= index + 1 %></td>
             <td><%= order.Customer.UserDetail.fullName %></td>
-            <td class="d-inline-block text-truncate" style="max-width: 250px">
-              <%= order.description %>
+            <td>
+              <%= order.description.substring(0, 40) + "..." %>
             </td>
             <td><%= order.formattedRupiah %></td>
             <td><%= order.status %></td>

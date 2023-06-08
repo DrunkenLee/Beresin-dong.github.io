@@ -70,9 +70,11 @@
         </div>
         <div class="col-4 mt-5">
           <div class="container text-center">
-            <h5>Your Order Summary</h5>
-            <img class="w-50 h-50 text-center" src="<%= resQr %>" alt="" />
-            <p>Scan Above Code for details of your order</p>
+            <% if (resQr) { %>
+              <h5>Your Order Summary</h5>
+              <img class="w-50 h-50 text-center" src="<%= resQr %>" alt="" />
+              <p>Scan Above Code for details of your order</p>
+            <% } %>
             <br />
             <br />
             <% if (resQr) { %> <%- include('./template/modal-success.ejs') %>

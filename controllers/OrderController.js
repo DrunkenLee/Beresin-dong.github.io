@@ -1,6 +1,4 @@
 const { Service, User, Order, UserDetail, OrderService} = require("../models");
-
-const { Service, User, Order, UserDetail } = require("../models");
 const { Op, where } = require("sequelize");
 const QRCode = require("qrcode");
 class OrderController {
@@ -108,7 +106,8 @@ class OrderController {
       .then((data) => {
         let custId = req.session.SessionUserId;
         let resQr = "";
-        res.render("form-add-orders", { data, error, custId, resQr });
+        let result = "";
+        res.render("form-add-orders", { data, error, custId, resQr, result });
       })
       .catch((err) => {
         res.send(err);
@@ -167,7 +166,7 @@ class OrderController {
         return OrderService.bulkCreate(orderServicesData)
       })
       .then(() => {
-        QRCode.toDataURL("asdasd", (err, resQr) => {
+        QRCode.toDataURL(Order.generateCustomerOrderId(result.id), (err, resQr) => {
           res.render("form-add-orders", { result, data, resQr });
         });
       })
