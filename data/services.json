@@ -1,0 +1,18 @@
+[
+    {
+        "name": "BeresinBangunan",
+        "price": 175000
+    },
+    {
+        "name": "BeresinListrik",
+        "price": 200000
+    },
+    {
+        "name": "BeresinSaluranAir",
+        "price": 200000
+    },
+    {
+        "name": "BeresinTaman",
+        "price": 185000
+    }
+]
