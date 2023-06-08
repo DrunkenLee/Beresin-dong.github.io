@@ -12,6 +12,12 @@ module.exports = {
       CustomerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Users",
+          },
+          key: "id",
+        },
       },
       description: {
         type: Sequelize.TEXT,
@@ -25,6 +31,12 @@ module.exports = {
       VendorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Users",
+          },
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

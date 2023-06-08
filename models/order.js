@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Order.belongsTo(models.User, {
+        as: "Customer",
+        foreignKey: "CustomerId",
+      });
+      Order.belongsTo(models.User, { as: "Vendor", foreignKey: "CustomerId" });
+      Order.belongsToMany(models.Service, { through: models.OrderService });
     }
 
     get formattedDate() {
