@@ -35,17 +35,19 @@
           </tr>
         </thead>
         <tbody>
+          <% result.forEach((order, index) => { %>
           <tr>
-            <td><%= '#' %></td>
-            <td><%= 'Contoh Cust' %></td>
-            <td><%= '20.000' %></td>
-            <td><%= 'Pending' %></td>
-            <td><%= new Date() %></td>
+            <td><%= index + 1 %></td>
+            <td><%= order.CustomerId %></td>
+            <td><%= order.price %></td>
+            <td><%= order.status %></td>
+            <td><%= order.formattedDate %></td>
             <td>
-              <button class="btn btn-success">Proses</button>
-              <button class="btn btn-danger">Cancel Proses</button>
+              <button class="btn btn-warning">Cancel</button>
+              <button class="btn btn-primary">Edit</button>
             </td>
           </tr>
+          <% }) %>
         </tbody>
       </table>
     </div>

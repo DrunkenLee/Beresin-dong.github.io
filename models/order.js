@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { formatRupiah, formatDate } = require("../helpers/formatter");
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     /**
@@ -10,10 +11,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    get formattedDate() {
+      return formatDate(this.updatedAt);
+    }
+
+    get formattedRupiah() {
+      return formatRupiah(this.totalPrice);
+    }
   }
   Order.init(
     {
-      CustomerId: DataTypes.STRING,
+      CustomerId: DataTypes.INTEGER,
       description: DataTypes.STRING,
       totalPrice: DataTypes.INTEGER,
       status: DataTypes.STRING,
@@ -24,5 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Order",
     }
   );
+
+  Order.addHook("beforeCreate", (order, options) => {
+    order.status = "Pending";
+    order.VendorId = -1;
+  });
+
   return Order;
 };

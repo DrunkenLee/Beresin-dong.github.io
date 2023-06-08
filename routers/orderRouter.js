@@ -25,6 +25,6 @@ const cekRole = function (req, res, next) {
 
 router.get("/", OrderController.getAllOrders);
 router.get("/add", cekRole, OrderController.getAddOrders);
-// router.post("/orders/add", OrderController.postAddOrders);
+router.post("/add", OrderController.postAddOrders);
 
 module.exports = router;

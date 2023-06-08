@@ -35,16 +35,18 @@
           </tr>
         </thead>
         <tbody>
+          <% result.forEach((order, index) => { %>
           <tr>
-            <td><%= '#' %></td>
-            <td><%= '20.000' %></td>
-            <td><%= 'Pending' %></td>
-            <td><%= new Date() %></td>
+            <td><%= index + 1 %></td>
+            <td><%= order.formattedRupiah %></td>
+            <td><%= order.status %></td>
+            <td><%= order.formattedDate %></td>
             <td>
-              <button class="btn btn-warning">Cancel</button>
+              <button class="btn btn-warning">Delete</button>
               <button class="btn btn-primary">Edit</button>
             </td>
           </tr>
+          <% }) %>
         </tbody>
       </table>
     </div>
