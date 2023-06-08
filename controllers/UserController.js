@@ -14,10 +14,17 @@ class UserController {
         res.redirect("/login");
       })
       .catch((err) => {
-        res.send(err);
+        if (err.name === "SequelizeValidationError") {
+          const errors = err.errors.map(e => {
+            return e.message;
+          }).join('<br>');
+          res.send(errors);
+        } else {
+          res.send(err);
+        }
       });
   }
-
+    
   static loginGet(req, res) {
     let error = "";
     res.render("user-login-form", { error });
@@ -37,11 +44,11 @@ class UserController {
           }
           throw "login gagal, username atau password tidak ditemukan";
         } else {
-          res.send(err);
+          res.send(err); // kyknya ga perlu
         }
       })
       .catch((err) => {
-        res.send(err);
+          res.send(err);
       });
   }
 }

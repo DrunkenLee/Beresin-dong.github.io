@@ -42,8 +42,12 @@
             <td><%= order.status %></td>
             <td><%= order.formattedDate %></td>
             <td>
-              <button class="btn btn-warning">Delete</button>
-              <button class="btn btn-primary">Edit</button>
+              <% if (order.status === 'Pending') { %>
+                <a href="/orders/delete/<%= order.id %>"><button class="btn btn-warning">Delete</button></a>
+                <a href="/orders/update/<%= order.id %>"><button class="btn btn-primary">Edit</button></a>
+              <% } else { %>
+                -
+              <%} %>
             </td>
           </tr>
           <% }) %>

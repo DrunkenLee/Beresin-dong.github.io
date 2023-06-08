@@ -1,4 +1,4 @@
-const { Service, User, Order, UserDetail } = require("../models");
+const { Service, User, Order, UserDetail, OrderService} = require("../models");
 
 class OrderController {
   //
@@ -81,6 +81,52 @@ class OrderController {
         res.send(err);
       });
   }
+
+  static deleteOrder(req, res) {
+    OrderService
+      .destroy({where: {
+        OrderId: req.params.id
+        }
+      })
+      .then(() => {
+        return Order.destroy({
+          where: {
+            id: req.params.id
+          }
+        })
+      })
+      .then(() => {
+        res.redirect(`/orders`)
+      })
+      .catch((err) => {
+        res.send(err);
+      })
+  }
+
+  static getUpdateOrder(req, res) {
+    let targetOrder;
+    let error = "";
+
+    Order
+      .findByPk(req.params.id, {
+        include: OrderService
+      })
+      .then((data) => {
+        targetOrder = data;
+        return Service.findAll()    
+      })
+      .then((services) => {
+        // res.render('form-edit-orders.ejs', {targetOrder, services, error});
+        res.send([targetOrder, services])
+      })
+      .catch((err) => {
+        console.log(err)
+        res.send(err)
+      })
+
+  }
+
+  static postUpdateOrder(req, res) {}
 }
 
 module.exports = OrderController;
