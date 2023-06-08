@@ -25,6 +25,15 @@ module.exports = (sequelize, DataTypes) => {
     get formattedRupiah() {
       return formatRupiah(this.totalPrice);
     }
+
+    static generateCustomerOrderId(value) {
+      let customerOrderId = "13";
+      for (let i = 0; i < 12 - String(value).length; i++) {
+        customerOrderId += '0'
+      }
+      customerOrderId += String(value);
+      return customerOrderId;
+    }
   }
   Order.init(
     {
