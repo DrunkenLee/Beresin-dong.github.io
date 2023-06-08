@@ -4,7 +4,7 @@
   "description": "On-Demand App for multiple services in need.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",

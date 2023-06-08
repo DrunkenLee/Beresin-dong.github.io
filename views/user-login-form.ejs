@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container text-center mt-5">
+      <h1>BeresinDong</h1>
+      <br />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium unde
+        molestias, quo animi recusandae ratione magni aspernatur amet voluptas
+        assumenda eligendi velit consequatur in inventore nihil ipsam mollitia
+        quasi quaerat temporibus aliquid! Aut dolor nihil reprehenderit quisquam
+        consequatur sed similique minus! Quibusdam, obcaecati earum numquam
+        sequi commodi sunt optio, debitis, fugit laboriosam quae dolorum alias
+        est harum qui repellat perferendis modi officiis voluptates esse cumque
+        dolore et. Nihil veniam earum iure corrupti, cupiditate laborum magni
+        dolorem amet animi vel culpa eos sunt nostrum aut ullam, aliquid
+        doloremque recusandae pariatur. Accusantium iure sit omnis officiis
+        culpa dolores itaque veniam, hic voluptatum.
+      </p>
+    </div>
+
+    <div style="border: 1px solid black" class="container mt-5">
+      <div class="row mt-5 mb-5">
+        <h3 class="text-center">Login Dulu Gasih ?</h3>
+        <div class="col-6 mt-5">
+          <img
+            src="https://picsum.photos/500/300"
+            class="img-fluid rounded mx-auto d-block"
+            alt="..."
+          />
+        </div>
+        <!-- start form ---------------------------------------------------------------------->
+        <div class="col-6 mt-5">
+          <form action="/user/login" method="post">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                name="username"
+                placeholder="username .. eg: masjonkeras123"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" />
+            </div>
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >Remember me!</label
+              >
+            </div>
+            <button type="submit" class="btn btn-success">Gas Lah!</button>
+          </form>
+        </div>
+        <!-- end form ------------------------------------------------------------------------------>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
