@@ -1,62 +1,102 @@
 const { Service, User, Order, UserDetail } = require("../models");
-
+const { Op, where } = require("sequelize");
+const QRCode = require("qrcode");
 class OrderController {
-  static filterGetOrder(options, req, res) {
-    Order.findAll({
-      where: {
-        options,
-      },
+  static getAllOrders(req, res) {
+    let error = "";
+    let { SessionRole, SessionUserId } = req.session;
+    var options = {
       include: {
         model: User,
         as: "Customer",
         include: { model: UserDetail },
       },
-    });
-  }
+      where: {},
+    };
 
-  static getAllOrders(req, res) {
-    let { SessionRole, SessionUserId } = req.session;
-    let { search, sort } = req.query;
     if (SessionRole == "vendor") {
-      let error = "";
-      Order.findAll({
-        where: {
-          VendorId: SessionUserId,
-        },
-        include: {
-          model: User,
-          as: "Customer",
-          include: { model: UserDetail },
-        },
-      })
-        .then((result) => {
-          console.log(result);
-          let error = "";
-          res.render("vendor-orders", { result, error });
+      if (req.query.search) {
+        let options = {
+          include: {
+            model: User,
+            as: "Customer",
+            include: { model: UserDetail },
+          },
+          where: {
+            [Op.and]: [
+              { VendorId: SessionUserId },
+              {
+                description: {
+                  [Op.iLike]: `%${req.query.search}%`,
+                },
+              },
+            ],
+          },
+        };
+
+        Order.findAll(options)
+          .then((result) => {
+            res.render("vendor-orders", { result, error });
+          })
+          .catch((err) => {
+            res.send(err);
+          });
+      } else {
+        Order.findAll({
+          where: { VendorId: SessionUserId },
+          include: {
+            model: User,
+            as: "Customer",
+            include: { model: UserDetail },
+          },
         })
-        .catch((err) => {
-          console.log(err);
-          res.send(err);
-        });
+          .then((result) => {
+            let error = "";
+            res.render("vendor-orders", { result, error });
+          })
+          .catch((err) => {
+            res.send(err);
+          });
+      }
     } else {
-      Order.findAll({
-        where: {
-          CustomerId: SessionUserId,
-        },
-        include: {
-          model: User,
-          as: "Customer",
-          include: { model: UserDetail },
-        },
-      })
-        .then((result) => {
-          let error = "";
-          res.render("orders", { result, error });
-        })
-        .catch((err) => {
-          console.log(err, SessionUserId);
-          res.send(err);
-        });
+      if (req.query.search) {
+        let options = {
+          include: {
+            model: User,
+            as: "Customer",
+            include: { model: UserDetail },
+          },
+          where: {
+            [Op.and]: [
+              { CustomerId: SessionUserId },
+              {
+                description: {
+                  [Op.iLike]: `%${req.query.search}%`,
+                },
+              },
+            ],
+          },
+        };
+        Order.findAll(options)
+          .then((result) => {
+            let error = "";
+            res.render("orders", { result, error });
+          })
+          .catch((err) => {
+            console.log(err, SessionUserId);
+            res.send(err);
+          });
+      } else {
+        Order.findAll({ where: { CustomerId: SessionUserId } })
+          .then((result) => {
+            let error = "";
+            res.render("orders", { result, error });
+          })
+          .catch((err) => {
+            console.log(err, SessionUserId);
+            res.send(err);
+          });
+      }
     }
   }
 
@@ -65,7 +105,8 @@ class OrderController {
     Service.findAll()
       .then((data) => {
         let custId = req.session.SessionUserId;
-        res.render("form-add-orders", { data, error, custId });
+        let resQr = "";
+        res.render("form-add-orders", { data, error, custId, resQr });
       })
       .catch((err) => {
         res.send(err);
@@ -99,7 +140,9 @@ class OrderController {
         });
       })
       .then((result) => {
-        res.render("form-add-orders", { result, data });
+        QRCode.toDataURL("asdasd", (err, resQr) => {
+          res.render("form-add-orders", { result, data, resQr });
+        });
       })
       .catch((err) => {
         console.log(err);

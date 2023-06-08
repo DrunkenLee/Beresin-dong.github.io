@@ -19,6 +19,28 @@
     <div class="container text-center mt-5">
       <h4>List Order Tersedia</h4>
       <br />
+      <form action="/orders/?search=" method="get">
+        <div class="input-group mb-3 mt-5">
+          <button type="button" class="btn btn-outline-secondary">Sort</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/orders/?sort=date"
+                >Sort By Date</a
+              >
+            </li>
+          </ul>
+          <input name="search" type="text" class="form-control" />
+          <button type="submit" class="btn btn-info">SEARCH</button>
+        </div>
+      </form>
       <br />
       <% if(error) { %> <%- include('./template/modal-error.ejs') %> <% } %>
     </div>
@@ -40,6 +62,9 @@
           <tr>
             <td><%= index + 1 %></td>
             <td><%= order.Customer.UserDetail.fullName %></td>
+            <td class="d-inline-block text-truncate" style="max-width: 250px">
+              <%= order.description %>
+            </td>
             <td><%= order.formattedRupiah %></td>
             <td><%= order.status %></td>
             <td><%= order.formattedDate %></td>
